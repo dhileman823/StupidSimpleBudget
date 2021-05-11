@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/nav_about"
-        android:name="com.company.stupidsimplebudget.ui.gallery.GalleryFragment"
+        android:name="com.company.stupidsimplebudget.ui.about.AboutFragment"
         android:label="@string/menu_about"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/nav_quit"
