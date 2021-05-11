@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.HomeFragment">
+
+        <TextView
+            android:id="@+id/tvLabel1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="25dp"
+            android:text="Available Funds" />
+
+        <TextView
+            android:id="@+id/tvAvailableFunds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabel1"
+            android:layout_below="@id/tvLabel1"
+            android:textSize="25dp"
+            android:text="$0.00" />
+
+        <View
+            android:id="@+id/separator1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAvailableFunds"/>
+
+        <TextView
+            android:id="@+id/tvLabelIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/separator1"
+            android:textSize="25dp"
+            android:text="Monthy Income" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvIncome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelIncome"/>
+
+        <Button
+            android:id="@+id/btnAddIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvIncome"
+            android:text="+ Add Income"/>
+
+        <View
+            android:id="@+id/separator2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnAddIncome"/>
+
+        <TextView
+            android:id="@+id/tvLabelExpenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/separator2"
+            android:textSize="25dp"
+            android:text="Monthy Expenses" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvExpenses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelExpenses"/>
+
+        <Button
+            android:id="@+id/btnAddExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvExpenses"
+            android:text="+ Add Expense"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
