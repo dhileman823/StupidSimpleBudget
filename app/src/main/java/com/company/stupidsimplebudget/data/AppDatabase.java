@@ -11,7 +11,7 @@ import com.company.stupidsimplebudget.data.expense.ExpenseDao;
 import com.company.stupidsimplebudget.data.income.Income;
 import com.company.stupidsimplebudget.data.income.IncomeDao;
 
-@Database(entities = {Expense.class, Income.class}, version = 1)
+@Database(entities = {Expense.class, Income.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract IncomeDao incomeDao();
     public abstract ExpenseDao expenseDao();
