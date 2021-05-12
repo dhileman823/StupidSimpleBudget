@@ -38,7 +38,11 @@ public class HomeViewModel extends AndroidViewModel {
         this.expenseRepository.insert(expense);
     }
 
+    public void delete(Expense expense) { this.expenseRepository.delete(expense); }
+
     public LiveData<List<Income>> getIncomes() { return incomes; }
 
     public void insert(Income income) { this.incomeRepository.insert(income); }
+
+    public void delete(Income income) { this.incomeRepository.delete(income); }
 }

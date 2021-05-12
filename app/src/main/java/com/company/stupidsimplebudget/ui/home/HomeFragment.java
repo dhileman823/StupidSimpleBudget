@@ -152,7 +152,12 @@ public class HomeFragment extends Fragment implements ExpenseDialogFragment.Expe
 
     @Override
     public void onExpenseEditDialogDelete(ExpenseEditDialogFragment dialog) {
-
+        Expense expense = new Expense();
+        expense.expenseId = dialog.getExpenseId();
+        expense.name = dialog.getName();
+        expense.amount = dialog.getAmount();
+        homeViewModel.delete(expense);
+        dialog.dismiss();
     }
 
     @Override

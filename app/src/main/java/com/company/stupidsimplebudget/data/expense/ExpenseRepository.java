@@ -42,4 +42,23 @@ public class ExpenseRepository {
             return null;
         }
     }
+
+    public void delete(Expense expense){
+        new deleteAsyncTask(expenseDao).execute(expense);
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<Expense, Void, Void> {
+
+        private ExpenseDao asyncDao;
+
+        deleteAsyncTask(ExpenseDao dao) {
+            asyncDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Expense... expenses) {
+            asyncDao.delete(expenses[0]);
+            return null;
+        }
+    }
 }

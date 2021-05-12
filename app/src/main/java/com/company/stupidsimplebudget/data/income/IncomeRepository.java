@@ -42,4 +42,23 @@ public class IncomeRepository {
             return null;
         }
     }
+
+    public void delete(Income income){
+        new deleteAsyncTask(incomeDao).execute(income);
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<Income, Void, Void> {
+
+        private IncomeDao asyncDao;
+
+        deleteAsyncTask(IncomeDao dao) {
+            asyncDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Income... incomes) {
+            asyncDao.delete(incomes[0]);
+            return null;
+        }
+    }
 }
