@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,7 @@ public class IncomeListAdapter extends RecyclerView.Adapter<IncomeListAdapter.In
         }
     }
 
+    private HomeFragment fragment;
     private LayoutInflater inflater = null;
     private List<Income> incomes;
 
@@ -41,8 +43,9 @@ public class IncomeListAdapter extends RecyclerView.Adapter<IncomeListAdapter.In
         notifyDataSetChanged();
     }
 
-    public IncomeListAdapter(Context context, List<Income> incomes) {
-        this.inflater = LayoutInflater.from(context);
+    public IncomeListAdapter(HomeFragment fragment, List<Income> incomes) {
+        this.fragment = fragment;
+        this.inflater = LayoutInflater.from(fragment.getContext());
         this.incomes = incomes;
     }
 
@@ -50,6 +53,24 @@ public class IncomeListAdapter extends RecyclerView.Adapter<IncomeListAdapter.In
     @Override
     public IncomeListAdapter.IncomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.list_item_income, parent, false);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Adapter", "Item clicked: " + view.getTag());
+                TextView tvIncomeAmount = v.findViewById(R.id.tvIncomeAmount);
+                TextView tvIncomeName = v.findViewById(R.id.tvIncomeName);
+                IncomeEditDialogFragment dialog = new IncomeEditDialogFragment();
+                dialog.setListener(fragment);
+                dialog.setIncomeId((int)view.getTag());
+                String amt = tvIncomeAmount.getText().toString();
+                amt = amt.substring(2);
+                dialog.setAmount(Float.parseFloat(amt)); //2, cut preceding $<space>
+                dialog.setName(tvIncomeName.getText().toString());
+                dialog.show(((AppCompatActivity)fragment.getContext()).getSupportFragmentManager(), "IncomeEditDialogFragment");
+            }
+        });
+
         return new IncomeViewHolder(view);
     }
 
@@ -59,6 +80,7 @@ public class IncomeListAdapter extends RecyclerView.Adapter<IncomeListAdapter.In
         DecimalFormat df = new DecimalFormat("0.00");
         holder.tvAmount.setText("$ "+df.format(income.amount));
         holder.tvName.setText(income.name);
+        holder.view.setTag(income.incomeId);
     }
 
     @Override

@@ -25,7 +25,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements ExpenseDialogFragment.ExpenseDialogListener, IncomeDialogFragment.IncomeDialogListener, ExpenseEditDialogFragment.ExpenseEditDialogListener {
+public class HomeFragment extends Fragment implements ExpenseDialogFragment.ExpenseDialogListener, IncomeDialogFragment.IncomeDialogListener, ExpenseEditDialogFragment.ExpenseEditDialogListener, IncomeEditDialogFragment.IncomeEditDialogListener {
 
     private HomeViewModel homeViewModel;
 
@@ -38,12 +38,14 @@ public class HomeFragment extends Fragment implements ExpenseDialogFragment.Expe
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         TextView textView = root.findViewById(R.id.tvAvailableFunds);
+
         RecyclerView expenseListView = root.findViewById(R.id.rvExpenses);
         ExpenseListAdapter expenseAdapter = new ExpenseListAdapter(this, new ArrayList<>());
         expenseListView.setAdapter(expenseAdapter);
         expenseListView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         RecyclerView incomeListView = root.findViewById(R.id.rvIncome);
-        IncomeListAdapter incomeAdapter = new IncomeListAdapter(getContext(), new ArrayList<>());
+        IncomeListAdapter incomeAdapter = new IncomeListAdapter(this, new ArrayList<>());
         incomeListView.setAdapter(incomeAdapter);
         incomeListView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -162,6 +164,32 @@ public class HomeFragment extends Fragment implements ExpenseDialogFragment.Expe
 
     @Override
     public void onExpenseEditDialogCancel(ExpenseEditDialogFragment dialog) {
+        Log.d("HomeFragment", "Cancel click");
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onIncomeEditDialogSave(IncomeEditDialogFragment dialog) {
+        Income income = new Income();
+        income.incomeId = dialog.getIncomeId();
+        income.name = dialog.getName();
+        income.amount = dialog.getAmount();
+        homeViewModel.insert(income);
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onIncomeEditDialogDelete(IncomeEditDialogFragment dialog) {
+        Income income = new Income();
+        income.incomeId = dialog.getIncomeId();
+        income.name = dialog.getName();
+        income.amount = dialog.getAmount();
+        homeViewModel.delete(income);
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onIncomeEditDialogCancel(IncomeEditDialogFragment dialog) {
         Log.d("HomeFragment", "Cancel click");
         dialog.dismiss();
     }
