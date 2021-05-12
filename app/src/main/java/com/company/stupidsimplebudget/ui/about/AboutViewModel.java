@@ -9,7 +9,7 @@ public class AboutViewModel extends ViewModel {
 
     public AboutViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is about fragment");
+        mText.setValue("This is a simple to use budgeting app. Enter your income for the month, your expenses for the month, and let the app calculate how much you have left over.");
     }
 
     public LiveData<String> getText() {

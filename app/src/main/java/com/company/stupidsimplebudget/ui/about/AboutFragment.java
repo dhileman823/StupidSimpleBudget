@@ -13,6 +13,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.company.stupidsimplebudget.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 public class AboutFragment extends Fragment {
     private AboutViewModel aboutViewModel;
@@ -28,6 +30,11 @@ public class AboutFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        AdView adView = root.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
         return root;
     }
 }
